@@ -89,6 +89,8 @@ ENV/
 .ropeproject
 
 # user-defined
+# hw1
 ./idea/
 bc_model/
 expert_data/
+dagger_model/

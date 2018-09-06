@@ -1,14 +1,4 @@
 #!/usr/bin/env python
-
-"""
-Code to load an expert policy and generate roll-out data for behavioral cloning.
-Example usage:
-    python run_expert.py experts/Humanoid-v1.pkl Humanoid-v1 --render \
-            --num_rollouts 20
-
-Author of this script and included expert policies: Jonathan Ho (hoj@openai.com)
-"""
-
 import os
 import pickle
 import tensorflow as tf
@@ -16,6 +6,7 @@ import numpy as np
 import tf_util
 import gym
 import load_policy
+
 
 def main():
     import argparse
@@ -43,13 +34,14 @@ def main():
         observations = []
         actions = []
         for i in range(args.num_rollouts):
-            print('iter', i)
+            if i % 10 == 0:
+                print('iter', i)
             obs = env.reset()
             done = False
             totalr = 0.
             steps = 0
             while not done:
-                action = policy_fn(obs[None,:])
+                action = policy_fn(obs[None, :])
                 observations.append(obs)
                 actions.append(action)
                 obs, r, done, _ = env.step(action)
@@ -57,7 +49,8 @@ def main():
                 steps += 1
                 if args.render:
                     env.render()
-                if steps % 100 == 0: print("%i/%i"%(steps, max_steps))
+                if steps % 100 == 0:
+                    print("%i/%i" % (steps, max_steps))
                 if steps >= max_steps:
                     break
             returns.append(totalr)
@@ -71,6 +64,7 @@ def main():
 
         with open(os.path.join('expert_data', args.envname + '.pkl'), 'wb') as f:
             pickle.dump(expert_data, f, pickle.HIGHEST_PROTOCOL)
+
 
 if __name__ == '__main__':
     main()
