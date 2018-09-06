@@ -1,4 +1,4 @@
-# README for code in /hw1
+# Instructions
 
 ## Setup
 
@@ -25,14 +25,16 @@ python run_bc.py bc_model/Ant-v2.h5 Ant-v2 --num_rollouts 20 --render
 
 Results are listed below:
 
-|             | expert_mean | expert_std | bc_mean | bc_std |
-| ----------- | ----------- | ---------- | ------- | ------ |
-| Ant         | 4831.49     | 121.63     | 4612.72 | 93.05  |
-| HalfCheetah | 4141.69     | 65.94      | 4065.79 | 83.44  |
-| Hopper      | 3779.38     | 4.38       | 781.79  | 117.69 |
-| Humanoid    | 10393.55    | 40.76      | 346.83  | 62.93  |
-| Reacher     | -3.78       | 1.83       | -7.11   | 1.82   |
-| Walker2d    | 5514.88     | 67.71      | 445.85  | 427.00 |
+|                 | expert_mean | expert_std | bc_mean | bc_std |
+| --------------- | ----------- | ---------- | ------- | ------ |
+| **Ant**         | 4831.49     | 121.63     | 4612.72 | 93.05  |
+| **HalfCheetah** | 4141.69     | 65.94      | 4065.79 | 83.44  |
+| Hopper          | 3779.38     | 4.38       | 781.79  | 117.69 |
+| Humanoid        | 10393.55    | 40.76      | 346.83  | 62.93  |
+| Reacher         | -3.78       | 1.83       | -7.11   | 1.82   |
+| Walker2d        | 5514.88     | 67.71      | 445.85  | 427.00 |
+
+(Note that task `Reacher` has different default `steps` with other tasks)
 
 Afterwards I choose different numer of `epoches` as the hyperparameter.
 
@@ -59,3 +61,19 @@ Results are listed below:
 
 ## Section 3
 
+Experiments are performed in task `Reacher`
+
+```bash
+# set different `iterations` and check the mean and std of rewards
+python run_dagger.py experts/Reacher-v2.pkl expert_data/Reacher-v2.pkl dagger_model Reacher-v2 --num_rollouts=20 --iterations=1
+python run_dagger.py experts/Reacher-v2.pkl expert_data/Reacher-v2.pkl dagger_model Reacher-v2 --num_rollouts=20 --iterations=3
+...
+python run_dagger.py experts/Reacher-v2.pkl expert_data/Reacher-v2.pkl dagger_model Reacher-v2 --num_rollouts=20 --iterations=15
+```
+
+Results are listed below:
+
+|      | 1     | 3     | 5     | 7     | 9     | 11    | 13    | 15    |
+| ---- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+| mean | -7.70 | -5.32 | -5.10 | -4.64 | -5.00 | -4.43 | -3.71 | -3.33 |
+| std  | 2.97  | 1.74  | 1.52  | 1.62  | 2.33  | 1.89  | 1.49  | 1.64  |
