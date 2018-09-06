@@ -22,6 +22,7 @@ def main():
     parser.add_argument('--num_rollouts', type=int, default=20,
                         help='Number of expert roll outs')
     parser.add_argument("--max_timesteps", type=int)
+    parser.add_argument("--iterations", type=int)
     args = parser.parse_args()
 
     print('loading and building expert policy')
@@ -47,7 +48,7 @@ def main():
     mean_rewards = []
     stds = []
 
-    for i in range(5):
+    for i in range(args.iterations):
         # (1) Train policy on D
         model = keras.Sequential([
             keras.layers.Dense(128, activation=tf.nn.relu,

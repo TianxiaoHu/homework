@@ -11,6 +11,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('expert_data_file', type=str)
     parser.add_argument('model_save_path', type=str)
+    parser.add_argument('epochs', type=int, default=10)
 
     args = parser.parse_args()
 
@@ -40,7 +41,7 @@ def main():
     ])
 
     model.compile(optimizer='adam', loss="mse", metrics=['mse'])
-    model.fit(x_train, y_train, epochs=10)
+    model.fit(x_train, y_train, epochs=args.epochs)
     print("model score", model.evaluate(x_test, y_test))
 
     model.save(args.model_save_path)
