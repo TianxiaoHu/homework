@@ -77,3 +77,14 @@ Results are listed below:
 | ---- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
 | mean | -7.70 | -5.32 | -5.10 | -4.64 | -5.00 | -4.43 | -3.71 | -3.33 |
 | std  | 2.97  | 1.74  | 1.52  | 1.62  | 2.33  | 1.89  | 1.49  | 1.64  |
+
+## Plot
+
+Run a simple python script for generating plots.
+
+2-2.eps and 3-2.eps will be automatically saved to current folder.
+
+```bash
+python plot.py
+```
+
