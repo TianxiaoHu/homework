@@ -294,7 +294,7 @@ class Agent(object):
             self.baseline_prediction = tf.squeeze(build_mlp(self.sy_ob_no, 1, "nn_baseline", n_layers=self.n_layers, size=self.size))
             # YOUR_CODE_HERE
             self.sy_target_n = tf.placeholder(shape=[None], name="baseline", dtype=tf.float32)
-            baseline_loss = tf.nn.l2_loss(self.baseline_prediction - self.baseline_target_n)
+            baseline_loss = tf.nn.l2_loss(self.baseline_prediction - self.sy_target_n)
             self.baseline_update_op = tf.train.AdamOptimizer(self.learning_rate).minimize(baseline_loss)
 
     def sample_trajectories(self, itr, env):
@@ -457,8 +457,10 @@ class Agent(object):
             # Hint #bl1: rescale the output from the nn_baseline to match the statistics
             # (mean and std) of the current batch of Q-values. (Goes with Hint
             # #bl2 in Agent.update_parameters.
-            raise NotImplementedError
-            b_n = None  # YOUR CODE HERE
+            # raise NotImplementedError
+            b_n = self.sess.run(self.baseline_prediction, feed_dict={self.sy_ob_no: ob_no})
+            b_n = (b_n - np.mean(b_n)) / np.std(b_n)
+            b_n = b_n * np.std(q_n) + np.mean(q_n)
             adv_n = q_n - b_n
         else:
             adv_n = q_n.copy()
@@ -529,8 +531,9 @@ class Agent(object):
             # Agent.compute_advantage.)
 
             # YOUR_CODE_HERE
-            raise NotImplementedError
-            target_n = None
+            # raise NotImplementedError
+            target_n = (q_n - np.mean(q_n)) / np.std(q_n)
+            self.sess.run(self.baseline_update_op, feed_dict={self.sy_ob_no: ob_no, self.sy_target_n: target_n})
 
         #====================================================================================#
         #                           ----------PROBLEM 3----------
@@ -544,8 +547,7 @@ class Agent(object):
         # and after an update, and then log them below.
 #
         # YOUR_CODE_HERE
-        self.sess.run(self.update_op, feed_dict={
-                      self.sy_ob_no: ob_no, self.sy_ac_na: ac_na, self.sy_adv_n: adv_n})
+        self.sess.run(self.update_op, feed_dict={self.sy_ob_no: ob_no, self.sy_ac_na: ac_na, self.sy_adv_n: adv_n})
         # raise NotImplementedError
 
 
