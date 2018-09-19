@@ -344,3 +344,6 @@ TSWLatexianTemp*
 
 # standalone packages
 *.sta
+
+# user-defined
+hw2/data/
