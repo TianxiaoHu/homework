@@ -105,7 +105,8 @@ Proof goes here.
 \textbf{Answers:}\\
 \begin{enumerate}
 \item Which gradient estimator has better performance without advantage-centering, the trajectory-centric one, or the one using reward-to-go?\\
-The one using reward-to-go have a better performance. From the learning curves for small batch experiments, we can see the green curve(reward-to-go) has a high average return than the blue curve(trajectory-centric).\item Did advantage centering help?\\
+The one using reward-to-go have a better performance. From the learning curves for small batch experiments, we can see the green curve(reward-to-go) has a high average return than the blue curve(trajectory-centric).
+\item Did advantage centering help?\\
 It helps. From the learning curves for small batch experiments, we can see the red curve(with advantage-centering) fluctuates less than the green curve(without advantage-centering).
 \item Did the batch size make an impact?\\
 Yes, by comparing the learning curves between small batch experiments and large batch experiments, we find large batch experiments converge more quickly.
@@ -131,13 +132,14 @@ Yes, by comparing the learning curves between small batch experiments and large 
 \section{Problem 8}
 After a $3 \times 3$ grid search, the best parameter set is $b = 50000, r = 0.02$.
 
-\textbf{Answer:} How did the batch size and learning rate affect the performance?
+\textbf{Answer:} How did the batch size and learning rate affect the performance? \\
+Large batch size will help the learning curve use less iterations to converge. Using a small learning rate can make sure not to miss any local minimum, but adjust the learning rate larger properly can help the performance improve more quickly.
 
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=5in]{Figure_1.png}
-\caption{Learning curve for HalfCheetah.}
+\includegraphics[width=5in]{Figure_5.png}
+\caption{Learning curve for HalfCheetah with different parameters.}
 \end{figure}
 
 \end{document}  
