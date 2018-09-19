@@ -21,5 +21,10 @@ $ python plot.py data/lb_no_rtg_dna_CartPole-v0_18-09-2018_16-29-33/ data/lb_rtg
 ## Problem 5
 
 ```bash
-$ python train_pg_f18.py InvertedPendulum-v2 -ep 1000 --discount 0.9 -n 100 -e 3 -l 2 -s 64 -b <b*> -lr <r*> -rtg --exp_name hc_b<b*>_r<r*>
+// set parameter `batchsize` = 64 and `learning rate` = 6e-3
+$ python train_pg_f18.py InvertedPendulum-v2 -ep 1000 --discount 0.9 -n 100 -e 3 -l 2 -s 64 -b 64 -lr 6e-3 -rtg --exp_name hc_b64_r6e-3
+
+// generate plot
+$ python plot.py data/hc_b64_r6e-3_InvertedPendulum-v2_18-09-2018_20-33-52/ --value AverageReturn
 ```
+
