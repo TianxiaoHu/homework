@@ -1,0 +1,144 @@
+%!TEX TS-program = xelatex  
+%!TEX encoding = UTF-8 Unicode  
+
+\documentclass[12pt]{article}  
+\usepackage{geometry}  
+\geometry{letterpaper}  
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode} 
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{graphics}
+
+\usepackage{xltxtra,fontspec,xunicode}
+\usepackage[slantfont,boldfont]{xeCJK}
+\setCJKmainfont{宋体}   
+\setmainfont{Optima}   
+\defaultfontfeatures{Mapping=tex-text}  
+
+\usepackage{xltxtra,fontspec,xunicode}
+\usepackage[slantfont,boldfont]{xeCJK}
+\setCJKmainfont{宋体}   
+\setmainfont{Optima}   
+\defaultfontfeatures{Mapping=tex-text}  
+
+\XeTeXlinebreaklocale “zh”  
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt   
+ 
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+} 
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\rhead{\hmwkClass}
+\chead{\hmwkTitle}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+% Homework Details
+
+\newcommand{\hmwkTitle}{homework\ \#2}
+\newcommand{\hmwkClass}{Deep Reinforcement Learning}
+\newcommand{\hmwkAuthorName}{Tianxiao Hu}
+
+
+\begin{document}
+\pagebreak
+
+\section{Problem 1}
+Proof goes here.
+
+\section{Problem 4}
+
+\begin{figure}[!h]
+\centering
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=8cm]{Figure_1.png}
+\caption{Learning curves for small batch experiments.}
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=8cm]{Figure_2.png}
+\caption{Learning curves for large batch experiments.}
+\end{minipage}
+\end{figure}
+
+\textbf{Answers:}\\
+\begin{enumerate}
+\item Which gradient estimator has better performance without advantage-centering, the trajectory-centric one, or the one using reward-to-go?\\
+The one using reward-to-go have a better performance. From the learning curves for small batch experiments, we can see the green curve(reward-to-go) has a high average return than the blue curve(trajectory-centric).\item Did advantage centering help?\\
+It helps. From the learning curves for small batch experiments, we can see the red curve(with advantage-centering) fluctuates less than the green curve(without advantage-centering).
+\item Did the batch size make an impact?\\
+Yes, by comparing the learning curves between small batch experiments and large batch experiments, we find large batch experiments converge more quickly.
+\end{enumerate}
+
+
+\section{Problem 5}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=5in]{Figure_3.png}
+\caption{Learning curve with $b = 64$ and $lr = 0.006$. The policy gets to optimum at about iteration \#65.}
+\end{figure}
+
+\section{Problem 7}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=5in]{Figure_4.png}
+\caption{Learning curve for LunarLander. The policy finally achieved an average return of around 180.}
+\end{figure}
+
+\section{Problem 8}
+After a $3 \times 3$ grid search, the best parameter set is $b = 50000, r = 0.02$.
+
+\textbf{Answer:} How did the batch size and learning rate affect the performance?
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=5in]{Figure_1.png}
+\caption{Learning curve for HalfCheetah.}
+\end{figure}
+
+\end{document}  
+  
