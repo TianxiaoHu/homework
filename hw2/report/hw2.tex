@@ -15,6 +15,8 @@
 \usepackage{caption}
 \usepackage{booktabs}
 \usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{amsfonts}
 
 \usepackage{xltxtra,fontspec,xunicode}
 \usepackage[slantfont,boldfont]{xeCJK}
@@ -84,7 +86,31 @@
 \pagebreak
 
 \section{Problem 1}
-Proof goes here.
+(a)
+\begin{equation}
+\begin{aligned}
+  & \nabla_\theta \mathbb{E}_{s_t, a_t \sim p(s_t, a_t)}[b_{(s_t)}]  \\
+= & \nabla_\theta \mathbb{E}_{s_t, a_t}[\mathbb{E}_{a_t \sim \pi_\theta(a_t|s_t)}[b(s_t)]] \\
+= & \mathbb{E} [\nabla_\theta \int \pi_\theta(a_t|s_t)b(s_t)da_t] \\
+= & \mathbb{E}_{s_t \sim p(s_t)} [b(s_t) \cdot \int \nabla_\theta \pi_\theta(a_t|s_t)da_t] \\
+= & \mathbb{E}_{s_t \sim p(s_t)}[b(s_t) \cdot \nabla_\theta \cdot \underbrace{\int \pi_\theta(a_t|s_t)da_t}_{\text{ = 1}}] \\
+= & \mathbb{E}_{s_t \sim p(s_t)}[b(s_t) \cdot \nabla_\theta] \\
+= & 0
+\end{aligned}
+\end{equation}
+
+(b) \\
+(1) Because this sequence is a markov decision process. Current state is only affected by last state. So conditioning on $(s_1, a_1, ..., a_{t^*-1}, s_{t^*})$ is equivalent to conditioning on $s_{t^*}$. \\
+(2) 
+\begin{equation}
+\begin{aligned}
+  & \nabla_\theta \mathbb{E}_{\tau \sim \pi_\theta(\tau)}[b(s_t^*)] \\
+= & \nabla_\theta \cdot \int p(a_{t^*}|s_{t^*} \cdot s_{t^*-1} \cdot a_{t^*-1} \cdot \cdots \cdot s_1) p(s_{t^* \cdot s_{t^*-1} \cdot \cdots \cdot s_1}) b(s_{t^*}) da_{t^*}ds_{t^*}\cdot \cdots \cdot ds_1 \\
+= & \nabla_\theta[\int p_\theta(a_{t^*}|s_{t^*}) \cdot p(s_{t^*}| ... ) b(s_{t^*})ds_{t^*}da_t] \underbrace{[\int p(s_{t^*-1} \cdot \cdots \cdot s_1)ds_{t^*-1} \cdot \cdots \cdot ds_1]}_{\text{= 1}} \\
+= & \underbrace{\nabla_\theta \int p_\theta(a_{t^*}|s_{t^*})da_{t^*}}_{\text{=0}} \cdot \mathbb{E}_{s_{t^*} \sim p(s_{t^*})}[b(s_{t^*})]) \cdot 1 \\
+= & 0
+\end{aligned}
+\end{equation}
 
 \section{Problem 4}
 
@@ -117,7 +143,7 @@ Yes, by comparing the learning curves between small batch experiments and large 
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=5in]{Figure_3.png}
+\includegraphics[width=3.8in]{Figure_3.png}
 \caption{Learning curve with $b = 64$ and $lr = 0.006$. The policy gets to optimum at about iteration \#65.}
 \end{figure}
 
@@ -125,7 +151,7 @@ Yes, by comparing the learning curves between small batch experiments and large 
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=5in]{Figure_4.png}
+\includegraphics[width=3.8in]{Figure_4.png}
 \caption{Learning curve for LunarLander. The policy finally achieved an average return of around 180.}
 \end{figure}
 
@@ -135,10 +161,9 @@ After a $3 \times 3$ grid search, the best parameter set is $b = 50000, r = 0.02
 \textbf{Answer:} How did the batch size and learning rate affect the performance? \\
 Large batch size will help the learning curve use less iterations to converge. Using a small learning rate can make sure not to miss any local minimum, but adjust the learning rate larger properly can help the performance improve more quickly.
 
-
 \begin{figure}[!h]
 \centering
-\includegraphics[width=5in]{Figure_5.png}
+\includegraphics[width=3.7in]{Figure_5.png}
 \caption{Learning curve for HalfCheetah with different parameters.}
 \end{figure}
 
