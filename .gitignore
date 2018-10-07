@@ -347,3 +347,4 @@ TSWLatexianTemp*
 
 # user-defined
 hw2/data/
+*.pkl
