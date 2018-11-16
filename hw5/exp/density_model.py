@@ -150,7 +150,7 @@ class RBF(Density_Model):
             assert deltas.shape == (b, B, ob_dim)
 
             # 2. Euclidean distance
-            euc_dists = np.sum(deltas, axis=2)
+            euc_dists = np.sum(deltas ** 2, axis=2)
             assert euc_dists.shape == (b, B)
 
             # Gaussian
@@ -158,7 +158,7 @@ class RBF(Density_Model):
             assert gaussians.shape == (b, B)
 
             # 4. Average
-            densities = np.average(gaussians, axis=1)
+            densities = np.mean(gaussians, axis=1)
             assert densities.shape == (b,)
 
             return densities
